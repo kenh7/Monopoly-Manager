@@ -1,0 +1,64 @@
+html,body {
+	margin:0;
+	padding:0;
+	height:100%; /* http://peterned.home.xs4all.nl/examples/csslayout1.html 
+	needed for container min-height */
+	background:#9F9;
+	font-family:arial,sans-serif;
+	font-size:small;
+	color:#666;
+}
+
+div#container
+{
+	position:relative; /* needed for footer positioning*/
+	margin:0 auto; /* center, not in IE5 */
+	width:85%;
+	background:white;
+	text-align:center;
+	height:auto !important; /* real browsers */
+	height:100%; /* IE6: treaded as min-height*/
+	min-height:100%; /* real browsers */
+	max-width:750px;
+	min-width:300px;
+}
+
+div#qwe
+{
+	
+	background-color: white;
+	height: 100%;
+	display:block;
+	padding-top:25px;
+	
+}
+
+#titleHeader
+{
+	
+	font-size: 50px;
+	margin-top: 20px;
+	
+}
+
+p#codeView
+{
+	
+	padding-top: 0px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+	
+	margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+	
+}
+
+input
+{
+	
+	text-align:center;
+	
+}

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang = 'en'>
+	<head>
+		<title>Monopoly Manager</title>
+		<link href = "cs.css" rel = "stylesheet"/>
+		<!--<link href = "css/bootstrap.min.css" rel = "stylesheet"/>-->
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link href="icons/apple-touch-icon.png" rel="apple-touch-icon" />
+		<link href="icons/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+		<link href="icons/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+		<link href="icons/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+		<link href="icons/apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
+		<link href="icons/icon-hires.png" rel="icon" sizes="192x192" />
+		<link href="icons/icon-normal.png" rel="icon" sizes="128x128" />
+		<script>
+			//visit localhost/test/ajax.html
+			function showHint(str)
+			{
+				if((str.length != 4) || (str.length == "") || (str.length == null))
+				{ 
+					document.getElementById("txtHint").innerHTML = "<br> Code field must be filled out";
+					//document.getElementById('remove').disabled = true;
+					document.getElementById("delCodeField").style.visibility = "hidden";
+					document.getElementById('delCodeField').value = '';
+					document.getElementById("dele").innerHTML = "";
+					document.getElementById("codeView").innerHTML = "";
+					return;
+				}
+				else
+				{
+					//document.getElementById('remove').disabled = false;
+					var xmlhttp = new XMLHttpRequest();
+					xmlhttp.onreadystatechange = function()
+					{
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+						{
+							document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+						}
+					}
+					xmlhttp.open("GET", "gethint.php?q=" + str, true);
+					xmlhttp.send();
+				}
+			}
+			
+			function deleteCode(str)
+			{
+				//document.getElementById("delCodeField");set invisible and visible
+				
+				if((str.length != 4) || (str.length == "") || (str.length == null))
+				{
+					document.getElementById("txtHint").innerHTML = "<br> Code field must be filled out";
+					//document.getElementById('remove').disabled = true;
+					
+					document.getElementById("codeView").innerHTML = "";
+					return;
+				}
+				else
+				{
+					var xmlhttp = new XMLHttpRequest();
+					xmlhttp.onreadystatechange = function()
+					{
+						if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+						{
+							document.getElementById("dele").innerHTML = xmlhttp.responseText;
+							//document.getElementById("txtHint").innerHTML = "";
+							//document.getElementById("").innerHTML = autofocus
+						}
+					}
+					xmlhttp.open("GET", "delCode.php?w=" + str, true);
+					xmlhttp.send();
+				}
+			}
+			
+			function setVisible()
+			{
+				document.getElementById("delCodeField").style.visibility = "visible";
+				document.myform2.del.focus();
+				//document.getElementById('delCodeField').setAttribute('style','visibility:visible');
+				//console.log("FDSFDSFDSFDFDSFDS");
+			}
+			
+			function viewCode()
+			{
+				//actually, just send them to the page to say its deleted then redirect them back?
+				var xmlhttp = new XMLHttpRequest();
+				
+				xmlhttp.onreadystatechange = function()
+				{
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+					{
+						document.getElementById("codeView").innerHTML = xmlhttp.responseText;
+						//document.getElementById("txtHint").innerHTML = "";
+						//document.getElementById("").innerHTML = autofocus
+					}
+				}
+				xmlhttp.open("GET", "viewCode.php", true);
+				xmlhttp.send();
+			}
+			
+		</script>
+		<!--
+		<script type="text/javascript">
+			function submitOnEnter(inputElement, event)
+			{
+				if (event.keyCode == 13)
+				{
+					inputElement.form.submit();
+				}
+			}
+			
+		</script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+			function addsearchproduct()
+			{  // this is JavaScript  function
+				$.ajax
+				(
+					{
+						url: "gethint.php?f=phpFunction",
+						type: 'POST',
+							// call php function , phpFunction=function Name , x= parameter 
+						data: {},
+						success: function(data1)
+						{
+							alert(data1);
+						}
+					}
+				);
+			}
+		</script>
+		-->
+	</head>
+	<!--
+	onkeypress="submitOnEnter(this, event);"
+	"location.href = 'viewCode.php'">
+	-->
+	<body>
+		<div id = 'container'><br>
+		<label id = 'titleHeader'>Monopoly Manager</label>
+			<div id = 'qwe'>
+				<form method = 'post' autocomplete = 'off'>
+					<label>Put your code here, the code will be automatically submitted as its typed: </label><br>
+					<br>
+					<input type="text" id = 'codeField' name = 'q' maxlength = '4' style = "text-transform: uppercase" autofocus onkeyup="showHint(this.value)">
+					<br><br>
+				</form>
+				
+				<button type = "button" onclick = 'viewCode()'>View All Codes</button>
+				
+				<button type = 'button' onclick = 'setVisible()' id = 'remove'>Remove A Code</button>
+				<br>
+				<form method = 'post' autocomplete = 'off' name = 'myform2'>
+					<input style = "visibility: hidden; text-transform: uppercase" type = 'text' id = 'delCodeField' name = 'del' maxlength = '4' onkeyup = 'deleteCode(this.value)'>
+				</form>
+				<p>Result: <span id="txtHint"></span></p>
+				<p id = 'dele'></p>
+				<p id = 'codeView'></p>
+				<!--
+				codeView does nothing?????
+				onclick = "location.href = 'delCode.php'"
+				<input type = 'submit' value = "Submit" onclick = 'return addsearchproduct()'>
+				<form>
+					<input type = 'button' value = 'Submit' id = 'submit' disabled>
+				</form>
+				-->
+			</div>
+		</div>
+	</body>
+	
+</html>

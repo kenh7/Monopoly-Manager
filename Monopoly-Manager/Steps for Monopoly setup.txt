@@ -1,0 +1,16 @@
+
+1) Move the monopoly folder to -> Installation Folder (wamp) -> And put it in the www folder
+
+2) Start WAMPServer (left click, Start All Services and Put Online)
+
+3) In your browser that you chose during installation, go to localhost/phpmyadmin
+
+4) On the upper left side, there should be a collumn of databases, if there isn't, there should be an arrow on the top left of the page, and that opens up the collumn and click New to create a new database
+
+5) For the database name field, type database and click create, leave collation as it is
+
+6) Go to import, click choose file, and click the database.sql file
+
+7) Open another tab and go to localhost/monopoly/ajax.html 
+
+8) Type in Monopoly codes (Click View All Codes button to see all the codes)
